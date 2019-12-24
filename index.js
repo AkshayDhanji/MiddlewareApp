@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const server = express();
 const router = express.Router();
+const http = require('http');
 
 var urlParser = bodyParser.urlencoded({ extended: true });
 server.use(urlParser);
@@ -36,5 +37,15 @@ router.route('/test')
 .get((req, res) => {
     res.json({status : 200, msg : "Service running..."});
 });
+
+const httpServer = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html');
+    res.end('<h1>Hello World</h1>');
+  });
+
+  httpServer.listen(3002,() => {
+    console.log(`Server running at port 3002`);
+  });
 
 module.exports = router;
