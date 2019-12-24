@@ -10,9 +10,8 @@ server.use(bodyParser.json());
 server.use('/api', router);
 
 server.get('/', (req, res) => {
-    //res.send(JSON.stringify({ welcome: 'Hello World' }));
-    res.setHeader('Accept', 'application/json');
-    res.send("<p>Hello World</p>");
+    res.setHeader('Content-Type', 'text/html');
+    res.end('<h1>Hello World</h1>');
 });
 
 router.route('/submitContact')
