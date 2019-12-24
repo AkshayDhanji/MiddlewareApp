@@ -15,17 +15,18 @@ server.get('/', (req, res) => {
 });
 
 router.route('/submitContact')
-.post((request, response) => {
-     response.setHeader( 'Content-Type', 'application/json' );
-     response.setHeader( 'Access-Control-Allow-Origin', '*' );
-    var res = JSON.stringify({
-        name: request.body.name,
-        email: request.body.email
+    .post((request, response) => {
+        response.setHeader('Content-Type', 'application/json');
+        response.setHeader('Access-Control-Allow-Origin', '*');
+        response.setHeader('Accept', 'application/json');
+        var res = JSON.stringify({
+            name: request.body.name,
+            email: request.body.email
+        });
+        console.log(res);
+        response.send(res);
+
     });
-    console.log(res);
-    response.send(res);
-    
-});
 
 server.listen(3001, () => {
     console.log('localhost is running on port 3001');
