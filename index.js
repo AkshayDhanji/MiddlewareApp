@@ -32,7 +32,7 @@ server.listen(3001, () => {
     console.log('localhost is running on port 3001');
 })
 
-router.route('/')
+router.route('/test')
 .get((req, res) => {
     res.json({status : 200, msg : "Service running..."});
 });
