@@ -11,6 +11,7 @@ server.use('/api', router);
 
 server.get('/', (req, res) => {
     //res.send(JSON.stringify({ welcome: 'Hello World' }));
+    res.setHeader('Accept', 'application/json');
     res.send("<p>Hello World</p>");
 });
 
