@@ -32,4 +32,9 @@ server.listen(3001, () => {
     console.log('localhost is running on port 3001');
 })
 
+router.route('/')
+.get((req, res) => {
+    res.json({status : 200, msg : "Service running..."});
+});
+
 module.exports = router;
