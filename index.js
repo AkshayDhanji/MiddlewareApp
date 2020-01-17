@@ -17,9 +17,10 @@ server.get('/', (req, res) => {
 
 router.route('/submitContact')
     .post((request, response) => {
-        response.setHeader('Content-Type', 'application/json');
-        response.setHeader('Access-Control-Allow-Origin', '*');
-        response.setHeader('Accept', 'application/json');
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+        res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
         var res = JSON.stringify({
             name: request.body.name,
             email: request.body.email
