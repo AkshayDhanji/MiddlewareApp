@@ -3,12 +3,14 @@ const bodyParser = require('body-parser');
 const server = express();
 const router = express.Router();
 const http = require('http');
+const cors = require('cors');
 
 var urlParser = bodyParser.urlencoded({ extended: true });
 server.use(urlParser);
 server.use(bodyParser.json());
 
 server.use('/api', router);
+server.use(cors());
 
 server.get('/', (req, res) => {
     res.setHeader('Content-Type', 'text/html');
