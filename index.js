@@ -12,9 +12,12 @@ server.use(bodyParser.json());
 server.use('/api', router);
 server.use(cors());
 
+server.listen(3001, () => {
+    console.log('localhost is running on port 3001');
+})
+
 server.get('/', (req, res) => {
-    res.setHeader('Content-Type', 'text/html');
-    res.end('<h1>Hello World</h1>');
+    res.json({status : 200, msg : "Service running..."});
 });
 
 router.route('/submitContact')
@@ -32,23 +35,9 @@ router.route('/submitContact')
 
     });
 
-server.listen(3001, () => {
-    console.log('localhost is running on port 3001');
-})
-
 router.route('/test')
 .get((req, res) => {
     res.json({status : 200, msg : "Service running..."});
 });
-
-const httpServer = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html');
-    res.end('<h1>Hello World</h1>');
-  });
-
-  httpServer.listen(3002,() => {
-    console.log(`Server running at port 3002`);
-  });
 
 module.exports = router;
