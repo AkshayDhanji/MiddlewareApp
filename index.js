@@ -1,43 +1,12 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const server = new express();
-const router = express.Router();
 const http = require('http');
-const cors = require('cors');
+const port = process.env.PORT || 3000
 
-var urlParser = bodyParser.urlencoded({ extended: true });
-server.use(urlParser);
-server.use(bodyParser.json());
-
-server.use('/api', router);
-server.use(cors());
-
-server.listen(3001, () => {
-    console.log('localhost is running on port 3001');
-})
-
-server.get('/', (req, res) => {
-    res.json({status : 200, msg : "Service running..."});
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/html');
+  res.end('<h1>Hello World</h1>');
 });
 
-router.route('/submitContact')
-    .post((request, response) => {
-        request.setHeader("Access-Control-Allow-Origin", "*");
-        request.setHeader("Access-Control-Allow-Credentials", "true");
-        request.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-        request.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-        var res = JSON.stringify({
-            name: request.body.name,
-            email: request.body.email
-        });
-        console.log(res);
-        response.send(res);
-
-    });
-
-router.route('/test')
-.get((req, res) => {
-    res.json({status : 200, msg : "Service running..."});
+server.listen(port,() => {
+  console.log(`Server running at port `+port);
 });
-
-module.exports = router;
