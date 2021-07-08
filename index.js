@@ -8,11 +8,12 @@ const cors = require('cors');
 var urlParser = bodyParser.urlencoded({ extended: true });
 server.use(urlParser);
 server.use(bodyParser.json());
+const PORT = process.env.PORT || 3000;
 
 server.use('/api', router);
 server.use(cors());
 
-server.listen(3001, () => {
+server.listen(PORT, () => {
     console.log('localhost is running on port 3001');
 })
 
