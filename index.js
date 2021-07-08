@@ -4,11 +4,11 @@ const server = new express();
 const router = express.Router();
 const http = require('http');
 const cors = require('cors');
+const PORT = process.env.PORT || 3000;
 
 var urlParser = bodyParser.urlencoded({ extended: true });
 server.use(urlParser);
 server.use(bodyParser.json());
-const PORT = process.env.PORT || 3000;
 
 server.use('/api', router);
 server.use(cors());
