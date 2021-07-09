@@ -4,36 +4,40 @@ const server = new express();
 const router = express.Router();
 const http = require('http');
 const cors = require('cors');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 var urlParser = bodyParser.urlencoded({ extended: true });
 server.use(urlParser);
 server.use(bodyParser.json());
 
-server.use('/api', router);
 server.use(cors());
+server.use(applyHeaders);
+
+server.use('/api', router);
 
 server.listen(PORT, () => {
-    console.log('localhost is running on port 3001');
+    console.log('localhost is running on port 8000');
 })
 
 server.get('/', (req, res) => {
     res.json({status : 200, msg : "Service running..."});
 });
 
+function applyHeaders(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+    next();
+}
+
 router.route('/submitContact')
     .post((request, response) => {
-        request.setHeader("Access-Control-Allow-Origin", "*");
-        request.setHeader("Access-Control-Allow-Credentials", "true");
-        request.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-        request.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-        var res = JSON.stringify({
-            name: request.body.name,
-            email: request.body.email
-        });
-        console.log(res);
-        response.send(res);
-
+        let result = {
+            "name": request.body.name,
+            "email": request.body.email
+        }
+        response.send(result);
     });
 
 router.route('/test')
